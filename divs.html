@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Divs</title>
+	<style>
+		.flex-container {
+			display: flex;
+			flex-direction: row;
+			background-color: red;
+		}
+
+		.flex-container>div {
+			/*div children of the flex container*/
+			background-color: #f1f1f1;
+			margin: 10px;
+			padding: 20px;
+			font-size: 30px;
+		}
+
+		/* Responsive layout */
+		@media (max-width: 600px) {
+			.flex-container {
+				flex-direction: column;
+				background-color: green;
+			}
+		}
+	</style>
+</head>
+
+
+
+<body>
+	<h1>Kaden builds list with divs</h1>
+
+	<input type="text" id="inputText" placeholder="Enter text">
+	<button id="addEndButton">Add end</button>
+	<button id="addFrontButton">Add front</button>
+	<button id="removeButton">Remove</button>
+
+	<div class="flex-container" id="flexContainer">
+		<div class="divlist">Item 1</div>
+		<div class="divlist">Item 2</div>
+	</div>
+
+	<script>
+		const inputElement = document.getElementById("inputText");
+		const addEndButton = document.getElementById("addEndButton");
+		const addFrontButton = document.getElementById("addFrontButton");
+		const removeButton = document.getElementById("removeButton");
+		const flexContainer = document.getElementById("flexContainer");
+
+		addEndButton.addEventListener("click", function () {
+			const newDiv = document.createElement("div");
+			const inputValue = inputElement.value.trim();
+
+			if (inputValue !== "") {
+				newDiv.innerHTML = inputValue;
+				newDiv.className = "divlist";
+				flexContainer.appendChild(newDiv);
+			}
+		});
+
+		removeButton.addEventListener("click", function () {
+			const divListItems = document.getElementsByClassName("divlist");
+			const length = divListItems.length;
+
+			if (length > 0) {
+				const middleIndex = Math.floor(length / 2);
+				const itemToRemove = divListItems[middleIndex];
+				itemToRemove.remove();
+			}
+		});
+
+		addFrontButton.addEventListener("click", function () {
+			const newDiv = document.createElement("div");
+			const inputValue = inputElement.value.trim();
+
+			if (inputValue !== "") {
+				newDiv.innerHTML = inputValue;
+				newDiv.className = "divlist";
+				flexContainer.insertBefore(newDiv, flexContainer.firstChild);
+			}
+		});
+	</script>
+</body>
+
+</html>
